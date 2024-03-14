@@ -1,7 +1,5 @@
-// DeleteBug2.js
 import React, { useState } from 'react';
 
-// Intentional bug: Deleting the wrong item
 const DeleteBug2 = () => {
   const [todos, setTodos] = useState([
     { id: 1, text: 'Example Todo 1' },
@@ -32,3 +30,4 @@ const DeleteBug2 = () => {
 }
 
 export default DeleteBug2;
+

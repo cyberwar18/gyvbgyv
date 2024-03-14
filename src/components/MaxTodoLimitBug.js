@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import DeleteBug2 from './DeleteBug2';
 
 const MaxTodoLimitBug = () => {
   const [todos, setTodos] = useState([]);
@@ -7,7 +8,7 @@ const MaxTodoLimitBug = () => {
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
-    if (inputValue.length > 10) {
+    if (inputValue.length > 20) {
       alert('You are exceeding the character limit!');
       setTodoValue(inputValue.slice(0, 10));
     } else {
@@ -16,7 +17,7 @@ const MaxTodoLimitBug = () => {
   };
 
   const addTodo = () => {
-    if (todos.length >= 8) {
+    if (todos.length >= 100) {
       alert('Maximum limit of 15 todo items reached!');
       return;
     }
@@ -30,8 +31,10 @@ const MaxTodoLimitBug = () => {
   };
 
   const deleteTodo = (idToDelete) => {
-    console.log("Deleted todo with id:", idToDelete);
+    // Filter out the todo with the matching id
+    setTodos(todos.filter((todo) => todo.id !== idToDelete));
   };
+
 
   const toggleTodoColor = (id) => {
     setCheckedTodos({ ...checkedTodos, [id]: !checkedTodos[id] });
@@ -41,13 +44,14 @@ const MaxTodoLimitBug = () => {
     <div className="todo-container">
       <h2 className="title">Todo List (Maximum limit: 10)</h2>
       <input
-        type="number"
+        type="textbox"
         value={todoValue}
         onChange={handleInputChange}
         placeholder="Enter todo text"
         className="todo-input"
+        required
       />
-      <button onClick={addTodo} className="add-button">Add Todo</button>
+      <button onClick={addTodo} className="add-button" required>Add Todo</button>
       <ul className="todo-list">
         {todos.map(todo => (
           <li key={todo.id} className={`todo-item ${checkedTodos[todo.id] ? 'completed' : ''}`}>
@@ -56,9 +60,15 @@ const MaxTodoLimitBug = () => {
               checked={checkedTodos[todo.id]}
               onChange={() => toggleTodoColor(todo.id)}
               className="todo-checkbox"
+              required
             />
             <span className="todo-text">{todo.text}</span>
-            <button onClick={() => deleteTodo(todo.id)} className="delete-button">Delete</button>
+            <li key={todo.id}>
+            {todo.text}
+            {/* Pass the todo's id to deleteTodo */}
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+          </li>
+
           </li>
         ))}
       </ul>

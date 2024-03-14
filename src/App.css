@@ -33,20 +33,24 @@
 .todo-list {
   list-style-type: none;
   padding: 0;
+  
 }
 
 .todo-item {
   display: flex;
   align-items: center;
   margin-bottom: 5px;
+  
 }
 
 .todo-item.completed {
-  color: #888;
+  color: green;
+
 }
 
 .todo-checkbox {
   margin-right: 10px;
+  color: green;
 }
 
 .todo-text {
